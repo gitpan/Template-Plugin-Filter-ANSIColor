@@ -16,17 +16,18 @@ Template::Plugin::Filter::ANSIColor - colorizes text using ANSI colors
 
 =head1 VERSION
 
-Version 0.02
+Version 0.03
 
 =cut
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 
 =head1 SYNOPSIS
 
 This is a Template Toolkit filter that colors the text
-using Term::ANSIColor.
+using Term::ANSIColor. It works on terminals that support
+at least 8 colors.
 
 	use Template;
 	
@@ -48,16 +49,19 @@ using Term::ANSIColor.
 
 =head2 init
 
-This method is invoked when TT finds a directive [% USE ANSIColor 'color' %].
+This method is invoked when Template Toolkit finds a directive [% USE ANSIColor 'color' %].
+The argument 'color' is the name for the filter. You may change it if you need.
 It has an option 'nocolor', which turns off colors (filter will not modify
 the text). Probably you would like to use it the following way:
 
 	# .....
-	$engine->process(\*DATA, {nocolor => 1 })
+	$engine->process(\*DATA, { colors_off => 1 })
 		|| die $engine->error();
+	
 	__DATA__
-	[% USE ANSIColor 'color' nocolor = nocolor %]
+	[% USE ANSIColor 'color' nocolor = colors_off %]
 	...
+
 See 'TO COLOR OR NOT TO COLOR' below
 
 =cut
@@ -131,6 +135,7 @@ sub install_filter {
 
 1;
 __END__
+
 =head1 TO COLOR OR NOT TO COLOR
 
 Text is not modified if

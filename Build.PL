@@ -10,11 +10,14 @@ my $builder = Module::Build->new(
     build_requires => {
         'Test::Most'	=> 0,
         'Test::Magpie'	=> 0,
+    	'Term::ANSIColor'	=> 3.01,
+    	'Template'			=> 0,
+    	'Term::Terminfo'	=> 0.06, 
     },
     requires => {
-    	'Term::ANSIColor'	=> 0,
-    	'Template::Toolkit'	=> 0,
-    	'Term::Terminfo'	=> 0, 
+    	'Term::ANSIColor'	=> 3.01,
+    	'Template'			=> 0,
+    	'Term::Terminfo'	=> 0.06, 
     },
     add_to_cleanup      => [ 'Template-Plugin-Filter-ANSIColor-*' ],
     create_makefile_pl => 'traditional',
